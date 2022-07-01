@@ -1,31 +1,54 @@
-const container = document.createElement("div");
-container.classList.add("container");
-const button = document.createElement("button");
-button.textContent = "Create New Grid";
-button.addEventListener('click', createGrid);
-document.body.appendChild(button);
-for (let i = 0; i < 16; i++) {
-   const row = document.createElement("div");
-   row.classList.add("row");
 
-   for (let j = 0; j < 16; j++) {
-      const box = document.createElement("div");
-      box.classList.add("box");
-      box.addEventListener("mouseover", onHover);
-      row.appendChild(box);
-   }
-   container.appendChild(row);
-}
-document.body.appendChild(container);
+createPage();
 
 function onHover() {
    this.style.backgroundColor = "red";
 }
 
-
-function createGrid() {
+function promptGrid() {
    let size = prompt('Grid Size:', '16');
-   console.log(size);
+	createGrid(size);
 }
 
 
+function createPage() {
+	const options = document.createElement("div");
+	options.classList.add("options");
+	const button = createGridSizeButton();
+	options.appendChild(button);
+	document.body.appendChild(options);
+	const container = document.createElement("div");
+	container.classList.add("container");
+	document.body.appendChild(container);
+	createGrid(16);
+}
+
+function createGridSizeButton() {
+	const button = document.createElement("button");
+	button.textContent = "Create New Grid";
+	button.addEventListener('click', promptGrid);
+	return button;
+}
+
+function createGrid(size) {
+	const container = document.querySelector(".container");
+
+	// Remove old grid
+	while (container.firstChild) {
+		container.firstChild.remove();
+	}
+
+	// Create new grid
+	for (let i = 0; i < size; i++) {
+   	const row = document.createElement("div");
+   	row.classList.add("row");
+   	for (let j = 0; j < size; j++) {
+      	const box = document.createElement("div");
+      	box.classList.add("box");
+      	box.addEventListener("mouseover", onHover);
+      	row.appendChild(box);
+
+   	}
+		container.appendChild(row);
+	}
+}
