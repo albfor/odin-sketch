@@ -1,4 +1,3 @@
-
 createPage();
 
 function onHover() {
@@ -21,8 +20,8 @@ function promptGrid() {
 function createPage() {
 	const options = document.createElement("div");
 	options.classList.add("options");
-	const button = createGridSizeButton();
-	options.appendChild(button);
+	options.appendChild(createGridSizeButton());
+	options.appendChild(createClearGridButton());
 	document.body.appendChild(options);
 	const container = document.createElement("div");
 	container.classList.add("container");
@@ -34,6 +33,13 @@ function createGridSizeButton() {
 	const button = document.createElement("button");
 	button.textContent = "Create New Grid";
 	button.addEventListener('click', promptGrid);
+	return button;
+}
+
+function createClearGridButton() {
+	const button = document.createElement("button");
+	button.textContent = "Clear Grid";
+	button.addEventListener('click', clearGrid);
 	return button;
 }
 
@@ -58,4 +64,11 @@ function createGrid(size) {
    	}
 		container.appendChild(row);
 	}
+}
+
+function clearGrid() {
+	const boxes = document.querySelectorAll('.box');
+	boxes.forEach(box => {
+		box.style.backgroundColor = "white";
+	});
 }
