@@ -1,25 +1,33 @@
 createPage();
+let shouldShade = true;
 
 function onHover() {
-   // randomColor(this);
-   shade(this);
+   if (shouldShade) {
+   	shade(this);
+   } else {
+   	randomColor(this);
+   }
+}
+
+function shadeRandomColorToggle() {
+	shouldShade = !shouldShade;
 }
 
 function shade(box) {
 	const shadeDiff = 10;
-   const num = box.style.filter.match(/\d+/);
+   let num = box.style.filter.match(/\d+/);
    if (num === null) {
-   	box.style.filter = `brightness(${100 - shadeDiff}%)`;
-   } else {
-   	box.style.filter = `brightness(${num - shadeDiff}%)`
-   }
+   	num = 100;
+   } 
+   box.style.filter = `brightness(${num - shadeDiff}%)`;
+   
 }
 
 function randomColor(box) {
 	const red = Math.floor(Math.random() * 255);
 	const blue = Math.floor(Math.random() * 255);
 	const green = Math.floor(Math.random() * 255);
-	box.style.backGroundColor = `rgb(${red}, ${green}, ${blue})`;
+	box.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
 }
 
 function promptGrid() {
@@ -38,6 +46,7 @@ function createPage() {
 	options.classList.add("options");
 	options.appendChild(createGridSizeButton());
 	options.appendChild(createClearGridButton());
+	options.appendChild(createToggleShadeRandomColorButton());
 	document.body.appendChild(options);
 	const container = document.createElement("div");
 	container.classList.add("container");
@@ -56,6 +65,13 @@ function createClearGridButton() {
 	const button = document.createElement("button");
 	button.textContent = "Clear Grid";
 	button.addEventListener('click', clearGrid);
+	return button;
+}
+
+function createToggleShadeRandomColorButton() {
+	const button = document.createElement("button");
+	button.textContent = "Toggle Shade/Random Color";
+	button.addEventListener('click', shadeRandomColorToggle);
 	return button;
 }
 
@@ -85,5 +101,8 @@ function createGrid(size) {
 
 function clearGrid() {
 	const boxes = document.querySelectorAll('.box');
-	boxes.forEach(box => box.style.backgroundColor = "white");
+	boxes.forEach(box => {
+		box.style.backgroundColor = "white";
+		box.style.filter = "brightness(100%)";
+	});
 }

@@ -26,6 +26,7 @@ body {
 .box {
    border: 1px solid black;
    background-color: white;
+   filter: brightness(100%);
    flex-grow: 1;
    flex-shrink: 1;
 }
