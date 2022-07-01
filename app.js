@@ -1,16 +1,12 @@
 createPage();
-let shouldShade = true;
+let COLORING_MODE = 'random';
 
 function onHover() {
-   if (shouldShade) {
+   if (COLORING_MODE === 'shade') {
    	shade(this);
-   } else {
+   } else if (COLORING_MODE === 'random'){
    	randomColor(this);
    }
-}
-
-function shadeRandomColorToggle() {
-	shouldShade = !shouldShade;
 }
 
 function shade(box) {
@@ -47,7 +43,9 @@ function createPage() {
 	options.classList.add("options");
 	options.appendChild(createGridSizeButton());
 	options.appendChild(createClearGridButton());
-	options.appendChild(createToggleShadeRandomColorButton());
+	options.appendChild(shadeButton());
+	options.appendChild(randomColorButton());
+	// options.appendChild(createToggleShadeRandomColorButton());
 	document.body.appendChild(options);
 	const container = document.createElement("div");
 	container.classList.add("container");
@@ -69,11 +67,35 @@ function createClearGridButton() {
 	return button;
 }
 
-function createToggleShadeRandomColorButton() {
+function shadeButton() {
 	const button = document.createElement("button");
-	button.textContent = "Toggle Shade/Random Color";
-	button.addEventListener('click', shadeRandomColorToggle);
+	button.textContent = "Shade";
+	button.classList.add("toggleable");
+	button.id = "shade";
+	button.addEventListener('click', toggleMode);
 	return button;
+}
+
+function randomColorButton() {
+	const button = document.createElement("button");
+	button.textContent = "Random Color";
+	button.id = 'random';
+	button.classList.add("toggleable");
+	button.classList.add("toggled");
+	button.addEventListener('click', toggleMode);
+	return button;
+}
+
+function toggleMode(event) {
+	COLORING_MODE = event.target.id;
+
+	const modeButtons = document.querySelectorAll('.toggleable');
+
+	modeButtons.forEach(btn => {
+		btn.classList.remove('toggled');
+	})
+
+	document.getElementById(event.target.id).classList.add('toggled');
 }
 
 function createGrid(size) {
