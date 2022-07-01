@@ -1,0 +1,20 @@
+body {
+   background-color: darkgrey;
+}
+
+.container {
+   display: flex;
+   flex-direction: column;
+   width = 960px;
+   background-color: pink;
+}
+
+.row {
+   display: flex;
+}
+.box {
+   background-color: blue;
+   flex-grow: 1;
+}
+
+
