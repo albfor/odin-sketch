@@ -2,6 +2,7 @@ body {
    display: flex;
    justify-content: center;
    background-color: darkgrey;
+   gap: 10px;
 }
 
 .container {
@@ -16,6 +17,7 @@ body {
 .options {
 	display: flex;
 	flex-direction: column;
+	gap: 10px;
 }
 
 .row {
@@ -26,9 +28,11 @@ body {
 .box {
    border: 1px solid black;
    background-color: white;
-   filter: brightness(100%);
    flex-grow: 1;
    flex-shrink: 1;
 }
 
+.options button {
+	background-color: darkgrey;
+}
 

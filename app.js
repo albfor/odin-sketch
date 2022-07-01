@@ -33,8 +33,9 @@ function randomColor(box) {
 function promptGrid() {
    const currentSize = document.querySelector(".row").childElementCount;
    let size = Number(prompt('Grid Size:', currentSize));
+   console.log(size);
    // Don't create a grid unless size was declared
-   if (Number.isNaN(size)) 
+   if (Number.isNaN(size) || size < 1) 
    	return;
 
 	createGrid(size);
