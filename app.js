@@ -41,8 +41,8 @@ function promptGrid() {
 function createPage() {
 	const options = document.createElement("div");
 	options.classList.add("options");
-	options.appendChild(createGridSizeButton());
-	options.appendChild(createClearGridButton());
+	options.appendChild(gridSizeButton());
+	options.appendChild(clearGridButton());
 	options.appendChild(toggleBorderButton());
 	options.appendChild(shadeButton());
 	options.appendChild(randomColorButton());
@@ -54,14 +54,14 @@ function createPage() {
 	createGrid(16);
 }
 
-function createGridSizeButton() {
+function gridSizeButton() {
 	const button = document.createElement("button");
 	button.textContent = "Create New Grid";
 	button.addEventListener('click', promptGrid);
 	return button;
 }
 
-function createClearGridButton() {
+function clearGridButton() {
 	const button = document.createElement("button");
 	button.textContent = "Clear Grid";
 	button.addEventListener('click', clearGrid);
