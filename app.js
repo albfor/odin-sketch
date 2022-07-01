@@ -12,7 +12,8 @@ function randomColor() {
 }
 
 function promptGrid() {
-   let size = prompt('Grid Size:', '16');
+   const currentSize = document.querySelector(".row").childElementCount;
+   let size = prompt('Grid Size:', currentSize);
 	createGrid(size);
 }
 
@@ -50,6 +51,8 @@ function createGrid(size) {
 	while (container.firstChild) {
 		container.firstChild.remove();
 	}
+
+	if (size > 100) size = 100; // Cap size to 100x100
 
 	// Create new grid
 	for (let i = 0; i < size; i++) {
