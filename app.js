@@ -13,7 +13,11 @@ function randomColor() {
 
 function promptGrid() {
    const currentSize = document.querySelector(".row").childElementCount;
-   let size = prompt('Grid Size:', currentSize);
+   let size = Number(prompt('Grid Size:', currentSize));
+   // Don't create a grid unless size was declared
+   if (Number.isNaN(size)) 
+   	return;
+
 	createGrid(size);
 }
 
@@ -63,7 +67,6 @@ function createGrid(size) {
       	box.classList.add("box");
       	box.addEventListener("mouseover", onHover);
       	row.appendChild(box);
-
    	}
 		container.appendChild(row);
 	}
@@ -71,7 +74,5 @@ function createGrid(size) {
 
 function clearGrid() {
 	const boxes = document.querySelectorAll('.box');
-	boxes.forEach(box => {
-		box.style.backgroundColor = "white";
-	});
+	boxes.forEach(box => box.style.backgroundColor = "white");
 }
