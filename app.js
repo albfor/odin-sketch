@@ -2,7 +2,14 @@
 createPage();
 
 function onHover() {
-   this.style.backgroundColor = "red";
+   this.style.backgroundColor = randomColor();
+}
+
+function randomColor() {
+	const red = Math.floor(Math.random() * 255);
+	const blue = Math.floor(Math.random() * 255);
+	const green = Math.floor(Math.random() * 255);
+	return `rgb(${red}, ${green}, ${blue})`;
 }
 
 function promptGrid() {
