@@ -43,6 +43,7 @@ function createPage() {
 	options.classList.add("options");
 	options.appendChild(createGridSizeButton());
 	options.appendChild(createClearGridButton());
+	options.appendChild(toggleBorderButton());
 	options.appendChild(shadeButton());
 	options.appendChild(randomColorButton());
 	// options.appendChild(createToggleShadeRandomColorButton());
@@ -65,6 +66,24 @@ function createClearGridButton() {
 	button.textContent = "Clear Grid";
 	button.addEventListener('click', clearGrid);
 	return button;
+}
+
+function toggleBorderButton() {
+	const button = document.createElement("button");
+	button.textContent = "Toggle Border";
+	button.addEventListener('click', toggleBorder);
+	return button;
+}
+
+function toggleBorder() {
+	const boxes = document.querySelectorAll('.box');
+
+	console.log(boxes[0].classList.contains('no-border'));
+	if (boxes[0].classList.contains('no-border')) {
+		boxes.forEach(box => box.classList.remove('no-border'));
+	} else {
+		boxes.forEach(box => box.classList.add('no-border'));
+	}
 }
 
 function shadeButton() {

@@ -47,3 +47,7 @@ button.toggled {
 	color: black;
 }
 
+
+.no-border {
+	border: none;
+}
