@@ -1,14 +1,25 @@
 createPage();
 
 function onHover() {
-   this.style.backgroundColor = randomColor();
+   // randomColor(this);
+   shade(this);
 }
 
-function randomColor() {
+function shade(box) {
+	const shadeDiff = 10;
+   const num = box.style.filter.match(/\d+/);
+   if (num === null) {
+   	box.style.filter = `brightness(${100 - shadeDiff}%)`;
+   } else {
+   	box.style.filter = `brightness(${num - shadeDiff}%)`
+   }
+}
+
+function randomColor(box) {
 	const red = Math.floor(Math.random() * 255);
 	const blue = Math.floor(Math.random() * 255);
 	const green = Math.floor(Math.random() * 255);
-	return `rgb(${red}, ${green}, ${blue})`;
+	box.style.backGroundColor = `rgb(${red}, ${green}, ${blue})`;
 }
 
 function promptGrid() {
