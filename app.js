@@ -1,16 +1,24 @@
-let COLORING_MODE = "random";
+let COLORING_MODE = "color";
+let CURRENT_COLOR = "#000000";
 init();
 
 function init() {
 	const options = document.createElement("div");
 	options.classList.add("options");
-	options.appendChild(createButton("Create New Grid", promptGrid));
-	options.appendChild(createButton("Clear Grid", clearGrid));
-	options.appendChild(createButton("Toggle Border", toggleBorder));
-	options.appendChild(createModeButton("Shade", "shade", "toggleable"));
+	options.appendChild(createButton("Create New Grid", "new-grid", promptGrid));
+	options.appendChild(createButton("Clear Grid", "clear-grid", clearGrid));
 	options.appendChild(
-		createModeButton("Random", "random", "toggleable", "toggled")
+		createButton("Toggle Border", "toggle-border", toggleBorder)
 	);
+	options.appendChild(
+		createButton("Change Color", "change-color", changeColor)
+	);
+	options.appendChild(
+		createModeButton("Color", "color", "toggleable", "toggled")
+	);
+	options.appendChild(createModeButton("Shade", "shade", "toggleable"));
+	options.appendChild(createModeButton("Random", "random", "toggleable"));
+
 	document.body.appendChild(options);
 	const container = document.createElement("div");
 	container.classList.add("container");
@@ -18,9 +26,10 @@ function init() {
 	createGrid(16);
 }
 
-function createButton(content, func) {
+function createButton(content, id, func) {
 	const button = document.createElement("button");
 	button.textContent = content;
+	button.id = id;
 	button.addEventListener("click", func);
 	return button;
 }
@@ -34,6 +43,13 @@ function createModeButton(content, id, ...classes) {
 	button.id = id;
 	button.addEventListener("click", toggleMode);
 	return button;
+}
+
+function changeColor() {
+	CURRENT_COLOR = prompt("New Color: ", CURRENT_COLOR);
+	const colorButton = document.getElementById("change-color");
+	colorButton.style.color = CURRENT_COLOR;
+	colorButton.style.backgroundColor = CURRENT_COLOR;
 }
 
 function createGrid(size) {
@@ -65,7 +81,13 @@ function onHover() {
 		shade(this);
 	} else if (COLORING_MODE === "random") {
 		randomColor(this);
+	} else if (COLORING_MODE === "color") {
+		color(this);
 	}
+}
+
+function color(box) {
+	box.style.backgroundColor = CURRENT_COLOR;
 }
 
 function shade(box) {
